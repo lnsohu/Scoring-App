@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "engines": {
-    "node": "16.x"  // 指定 Node.js 版本为 16.x
+    "node": "16.x"  
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.39.0",  // Supabase 客户端库
+    "@supabase/supabase-js": "^2.39.0",  
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "^5.0.1",
