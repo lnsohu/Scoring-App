@@ -41,7 +41,7 @@ const App = () => {
                     path="/add-restaurant"
                     element={
                         isLoggedIn ? (
-                            <AddRestaurant /> // 如果已登录，显示添加餐厅页面
+                            <RestaurantAdmin /> // 如果已登录，显示添加餐厅页面
                         ) : (
                             <Navigate to="/" /> // 如果未登录，跳转到登录页面
                         )
