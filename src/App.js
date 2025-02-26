@@ -1,49 +1,55 @@
 import React, { useState } from 'react';
-import './styles.css';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Login from './Login'; // 登录页面组件
+import RestaurantList from './pages/restaurantAdmin'; // 餐厅列表页面
+import AddRestaurant from './pages/AddRestaurant'; // 添加餐厅页面
 
 const App = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    const handleLogin = (e) => {
-        e.preventDefault();
-        // Hardcoded username and password
-        if (username === 'admin' && password === 'password') {
-            setIsLoggedIn(true);
-        } else {
-            alert('Invalid username or password');
-        }
+    // 登录成功后的回调函数
+    const handleLogin = () => {
+        setIsLoggedIn(true);
     };
 
     return (
-        <div className="app">
-            {!isLoggedIn ? (
-                <form onSubmit={handleLogin} className="login-form">
-                    <h1>Login</h1>
-                    <input
-                        type="text"
-                        placeholder="Username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        required
-                    />
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                    <button type="submit">Login</button>
-                </form>
-            ) : (
-                <div className="welcome-message">
-                    <h1>Welcome, Admin!</h1>
-                    <p>You are now logged in.</p>
-                </div>
-            )}
-        </div>
+        <Router>
+            <Routes>
+                {/* 默认路径，显示登录页面 */}
+                <Route
+                    path="/"
+                    element={
+                        isLoggedIn ? (
+                            <Navigate to="/restaurants" /> // 如果已登录，跳转到餐厅列表
+                        ) : (
+                            <Login onLogin={handleLogin} /> // 如果未登录，显示登录页面
+                        )
+                    }
+                />
+                {/* 餐厅列表页面 */}
+                <Route
+                    path="/restaurants"
+                    element={
+                        isLoggedIn ? (
+                            <RestaurantList /> // 如果已登录，显示餐厅列表
+                        ) : (
+                            <Navigate to="/" /> // 如果未登录，跳转到登录页面
+                        )
+                    }
+                />
+                {/* 添加餐厅页面 */}
+                <Route
+                    path="/add-restaurant"
+                    element={
+                        isLoggedIn ? (
+                            <AddRestaurant /> // 如果已登录，显示添加餐厅页面
+                        ) : (
+                            <Navigate to="/" /> // 如果未登录，跳转到登录页面
+                        )
+                    }
+                />
+            </Routes>
+        </Router>
     );
 };
 
