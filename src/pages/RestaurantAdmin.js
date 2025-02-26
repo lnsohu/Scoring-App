@@ -19,6 +19,7 @@ const RestaurantAdmin = () => {
         if (error) {
             console.error('Error adding restaurant:', error);
         } else {
+            console.log(data); // 直接使用 data 变量
             navigate('/restaurants'); // 保存成功后跳转回餐厅列表
         }
     };
