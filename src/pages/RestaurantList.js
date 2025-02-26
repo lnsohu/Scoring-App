@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 
 const RestaurantList = () => {
     const [restaurants, setRestaurants] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchRestaurants();
@@ -11,11 +12,15 @@ const RestaurantList = () => {
 
     const fetchRestaurants = async () => {
         const { data, error } = await supabase
-            .from('restaurants')
+            .from('hk_restaurant')
             .select('*');
 
         if (error) console.error('Error fetching restaurants:', error);
         else setRestaurants(data);
+    };
+
+    const handleAdd = () => {
+        navigate('/restaurants/add'); // 跳转到添加餐厅页面
     };
 
     return (
@@ -28,9 +33,7 @@ const RestaurantList = () => {
                     </li>
                 ))}
             </ul>
-            <Link to="/add-restaurant">
-                <button>Add Restaurant</button>
-            </Link>
+            <button onClick={handleAdd}>Add Restaurant</button>
         </div>
     );
 };
