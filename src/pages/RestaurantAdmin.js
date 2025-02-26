@@ -12,12 +12,13 @@ const AddRestaurant = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const { data, error } = await supabase
-            .from('restaurants')
+            .from('hk_restaurants')
             .insert([{ name, feature, height, status }]);
 
         if (error) {
             console.error('Error adding restaurant:', error);
         } else {
+            console.log(data); // 直接使用 data 变量
             navigate('/');
         }
     };
