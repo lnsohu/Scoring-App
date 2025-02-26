@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './Login'; // 登录页面组件
 import RestaurantList from './pages/RestaurantAdmin'; // 餐厅列表页面
-import AddRestaurant from './pages/AddRestaurant'; // 添加餐厅页面
 
 const App = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
