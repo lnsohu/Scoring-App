@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './Login'; // 登录页面组件
 import RestaurantList from './pages/RestaurantList'; // 餐厅列表页面
+import RestaurantAdmin from './pages/RestaurantAdmin'; // 添加餐厅页面
 
 const App = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -31,6 +32,17 @@ const App = () => {
                     element={
                         isLoggedIn ? (
                             <RestaurantList /> // 如果已登录，显示餐厅列表
+                        ) : (
+                            <Navigate to="/" /> // 如果未登录，跳转到登录页面
+                        )
+                    }
+                />
+                {/* 添加餐厅页面 */}
+                <Route
+                    path="/restaurants/add"
+                    element={
+                        isLoggedIn ? (
+                            <RestaurantAdmin /> // 如果已登录，显示添加餐厅页面
                         ) : (
                             <Navigate to="/" /> // 如果未登录，跳转到登录页面
                         )
