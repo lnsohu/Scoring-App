@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 
-const AddRestaurant = () => {
+const RestaurantAdmin = () => {
     const [name, setName] = useState('');
     const [feature, setFeature] = useState('');
     const [height, setHeight] = useState('');
@@ -11,15 +11,15 @@ const AddRestaurant = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         const { data, error } = await supabase
-            .from('hk_restaurants')
+            .from('hk_restaurant')
             .insert([{ name, feature, height, status }]);
 
         if (error) {
             console.error('Error adding restaurant:', error);
         } else {
-            console.log(data); // 直接使用 data 变量
-            navigate('/');
+            navigate('/restaurants'); // 保存成功后跳转回餐厅列表
         }
     };
 
@@ -69,4 +69,4 @@ const AddRestaurant = () => {
     );
 };
 
-export default AddRestaurant;
+export default RestaurantAdmin;
