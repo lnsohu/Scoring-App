@@ -1,46 +1,45 @@
-// src/Login.js
-
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+const Login = ({ onLogin }) => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // 这里可以添加硬编码的登录逻辑
-    if (username === 'admin' && password === 'password') {
-      alert('登录成功');
-    } else {
-      alert('登录失败');
-    }
-  };
+    const handleLogin = (e) => {
+        e.preventDefault();
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>
-          用户名：
-          <input 
-            type="text" 
-            value={username} 
-            onChange={(e) => setUsername(e.target.value)} 
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          密码：
-          <input 
-            type="password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
-          />
-        </label>
-      </div>
-      <button type="submit">登录</button>
-    </form>
-  );
+        // 硬编码的用户名和密码
+        if (username === 'admin' && password === 'password') {
+            onLogin(); // 调用父组件传递的回调函数
+            navigate('/restaurants'); // 跳转到餐厅列表页面
+        } else {
+            alert('Invalid username or password');
+        }
+    };
+
+    return (
+        <div className="app">
+            <form onSubmit={handleLogin} className="login-form">
+                <h1>Login</h1>
+                <input
+                    type="text"
+                    placeholder="Username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                />
+                <input
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                />
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    );
 };
 
 export default Login;
