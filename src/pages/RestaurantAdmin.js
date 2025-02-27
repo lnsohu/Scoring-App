@@ -20,7 +20,7 @@ const RestaurantAdmin = () => {
         e.preventDefault();
 
         const { data, error } = await supabase
-            .from('hk_restaurant')
+            .from('restaurants')
             .insert([{ name, feature, height, status }]);
 
         if (error) {
