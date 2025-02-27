@@ -12,7 +12,7 @@ const RestaurantList = () => {
 
     const fetchRestaurants = async () => {
         const { data, error } = await supabase
-            .from('hk_restaurant')
+            .from('restaurants')
             .select('*');
 
         if (error) console.error('Error fetching restaurants:', error);
