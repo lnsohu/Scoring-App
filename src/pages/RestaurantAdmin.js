@@ -9,6 +9,13 @@ const RestaurantAdmin = () => {
     const [status, setStatus] = useState('');
     const navigate = useNavigate();
 
+    const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
+    const supabaseAnonKey = process.env.REACT_APP_SUPABASE_KEY;
+
+    // 输出环境变量以进行调试
+    console.log('supabase_db_SUPABASE_URL:', supabaseUrl);
+    console.log('supabase_db_NEXT_PUBLIC_SUPABASE_ANON_KEY:', supabaseAnonKey);
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
 
