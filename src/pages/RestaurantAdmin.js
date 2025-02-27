@@ -14,7 +14,7 @@ const RestaurantAdmin = () => {
 
     // 输出环境变量以进行调试
     console.log('Supabase URL:', supabaseUrl);
-    console.log('Supabase Key:', supabaseKey);
+    console.log('Supabase Anon Key:', supabaseAnonKey);
     
     const handleSubmit = async (e) => {
         e.preventDefault();
