@@ -17,7 +17,7 @@ const Menu = () => {
   const fetchMenuItems = useCallback(async () => {
     setLoading(true);
     const { data, error } = await supabase
-      .from('Menu')
+      .from('menu')
       .select('*')
       .eq('restaurant', restaurantId)
       .order('no', { ascending: true });
@@ -53,7 +53,7 @@ const Menu = () => {
 
     // 移除未使用的data变量
     const { error } = await supabase
-      .from('Menu')
+      .from('menu')
       .insert([
         {
           no: newItem.no,
