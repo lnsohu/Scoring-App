@@ -1,54 +1,66 @@
 .menu-container {
-  max-width: 800px;
-  margin: 0 auto;
   padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
-.loading {
-  text-align: center;
-  padding: 40px;
-  font-size: 18px;
+.menu-list table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
 }
 
-.menu-header {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+.menu-list th, 
+.menu-list td {
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.menu-list th {
+  background-color: #f2f2f2;
+}
+
+.add-menu-form {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
   padding: 10px 15px;
-  background-color: #f5f5f5;
-  font-weight: bold;
-  border-bottom: 1px solid #ddd;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
-.menu-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+button:hover {
+  background-color: #45a049;
 }
 
-.menu-item {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  padding: 12px 15px;
-  border-bottom: 1px solid #eee;
-  align-items: center;
-}
-
-.menu-item:hover {
-  background-color: #f9f9f9;
-}
-
-.food-name {
-  font-weight: 500;
-}
-
-.food-score {
-  text-align: right;
-  color: #ff6b00;
-  font-weight: bold;
-}
-
-.no-items {
-  text-align: center;
-  padding: 40px;
-  color: #888;
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
 }
