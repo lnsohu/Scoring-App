@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from '../services/supabaseClient'; // 确保导入路径正确
+import { supabase } from '../supabaseClient';
 import { useParams } from 'react-router-dom';
 
 const Menu = () => {
