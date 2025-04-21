@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from '../supabase';
+import { supabase } from '../supabaseClient';
 import { useParams } from 'react-router-dom';
 
 const Menu = () => {
