@@ -4,6 +4,8 @@ import Login from './Login'; // 登录页面组件
 import RestaurantList from './pages/RestaurantList'; // 餐厅列表页面
 import RestaurantAdmin from './pages/RestaurantAdmin'; // 添加餐厅页面
 import Menu from './pages/Menu'; // 菜单页面组件
+// 在 App.js 中添加路由配置
+<Route path="/restaurant/:restaurantId/menu" element={<Menu />} />
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
