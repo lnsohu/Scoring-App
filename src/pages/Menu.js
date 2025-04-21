@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from '../supabaseClient'; // 确保导入路径正确
+import { supabase } from '../supabase';
 import { useParams } from 'react-router-dom';
 
 const Menu = () => {
-  const { restaurantId } = useParams();
+  const { restaurantId } = useParams(); // 从路由获取当前餐厅ID
   const [menuItems, setMenuItems] = useState([]);
   const [newItem, setNewItem] = useState({
     no: '',
@@ -36,7 +36,10 @@ const Menu = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setNewItem(prev => ({ ...prev, [name]: value }));
+    setNewItem(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   const handleAddItem = async () => {
@@ -44,23 +47,32 @@ const Menu = () => {
       alert('请填写所有字段');
       return;
     }
-    setLoading(true);
-    const currentDate = new Date().toISOString().split('T')[0]; // 获取当前日期
 
-    const { error } = await supabase
+    setLoading(true);
+    const currentDate = new Date().toISOString().split('T')[0]; // 获取当前日期 YYYY-MM-DD
+
+    const { data, error } = await supabase
       .from('Menu')
-      .insert([{
-        no: newItem.no,
-        food: newItem.food,
-        style: newItem.style,
-        score: parseFloat(newItem.score),
-        restaurant: restaurantId, // 当前餐厅ID
-        date: currentDate
-      }]);
+      .insert([
+        {
+          no: newItem.no,
+          food: newItem.food,
+          style: newItem.style,
+          score: parseFloat(newItem.score),
+          restaurant: restaurantId,
+          date: currentDate
+        }
+      ]);
 
     if (!error) {
-      setNewItem({ no: '', food: '', style: '', score: '' }); // 清空输入框
-      await fetchMenuItems(); // 刷新菜单列表
+      // 清空输入框并刷新列表
+      setNewItem({
+        no: '',
+        food: '',
+        style: '',
+        score: ''
+      });
+      await fetchMenuItems();
     } else {
       console.error('Error adding menu item:', error);
       alert('添加失败，请重试');
@@ -71,6 +83,8 @@ const Menu = () => {
   return (
     <div className="menu-container">
       <h2>餐厅菜单</h2>
+      
+      {/* 菜单列表 */}
       <div className="menu-list">
         {loading && menuItems.length === 0 ? (
           <p>加载中...</p>
@@ -101,25 +115,57 @@ const Menu = () => {
           <p>暂无菜单数据</p>
         )}
       </div>
+
+      {/* 添加新菜单项表单 */}
       <div className="add-menu-form">
         <h3>添加新菜品</h3>
         <div className="form-group">
           <label>No.</label>
-          <input type="text" name="no" value={newItem.no} onChange={handleInputChange} placeholder="输入编号" />
+          <input
+            type="text"
+            name="no"
+            value={newItem.no}
+            onChange={handleInputChange}
+            placeholder="输入编号"
+          />
         </div>
         <div className="form-group">
           <label>Food</label>
-          <input type="text" name="food" value={newItem.food} onChange={handleInputChange} placeholder="输入菜品名称" />
+          <input
+            type="text"
+            name="food"
+            value={newItem.food}
+            onChange={handleInputChange}
+            placeholder="输入菜品名称"
+          />
         </div>
         <div className="form-group">
           <label>Style</label>
-          <input type="text" name="style" value={newItem.style} onChange={handleInputChange} placeholder="输入菜品类型" />
+          <input
+            type="text"
+            name="style"
+            value={newItem.style}
+            onChange={handleInputChange}
+            placeholder="输入菜品类型"
+          />
         </div>
         <div className="form-group">
           <label>Score</label>
-          <input type="number" name="score" value={newItem.score} onChange={handleInputChange} placeholder="输入评分" step="0.1" min="0" max="10" />
+          <input
+            type="number"
+            name="score"
+            value={newItem.score}
+            onChange={handleInputChange}
+            placeholder="输入评分"
+            step="0.1"
+            min="0"
+            max="10"
+          />
         </div>
-        <button onClick={handleAddItem} disabled={loading}>
+        <button 
+          onClick={handleAddItem}
+          disabled={loading}
+        >
           {loading ? '添加中...' : 'Add'}
         </button>
       </div>
