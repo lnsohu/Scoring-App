@@ -23,13 +23,17 @@ const RestaurantList = () => {
         navigate('/restaurants/add'); // 跳转到添加餐厅页面
     };
 
+    const handleRestaurantClick = (restaurantId) => {
+        navigate(`/menu/${restaurantId}`); // 跳转到菜单页面，显示当前餐厅的菜单
+    };
+
     return (
         <div>
             <h1>Restaurant List</h1>
             <ul>
                 {restaurants.map((restaurant) => (
-                    <li key={restaurant.id}>
-                        <strong>{restaurant.name}</strong> - {restaurant.feature} ({restaurant.status})
+                    <li key={restaurant.id} onClick={() => handleRestaurantClick(restaurant.id)} style={{ cursor: 'pointer' }}>
+                        <strong>{restaurant.name}</strong> - {restaurant.feature} ({restaurant.status}) - Height: {restaurant.height}
                     </li>
                 ))}
             </ul>
