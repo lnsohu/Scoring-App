@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from '../supabaseClient';
+import { supabase } from '../supabaseClient'; // 确保导入路径正确
 import { useParams } from 'react-router-dom';
 
 const Menu = () => {
@@ -13,9 +13,10 @@ const Menu = () => {
   });
   const [loading, setLoading] = useState(false);
 
+  // 获取当前餐厅的菜单
   useEffect(() => {
     fetchMenuItems();
-  }, [restaurantId, fetchMenuItems]); // 添加 fetchMenuItems 作为依赖项
+  }, [restaurantId]);
 
   const fetchMenuItems = async () => {
     setLoading(true);
@@ -44,7 +45,7 @@ const Menu = () => {
       return;
     }
     setLoading(true);
-    const currentDate = new Date().toISOString().split('T')[0];
+    const currentDate = new Date().toISOString().split('T')[0]; // 获取当前日期
 
     const { error } = await supabase
       .from('Menu')
@@ -53,13 +54,13 @@ const Menu = () => {
         food: newItem.food,
         style: newItem.style,
         score: parseFloat(newItem.score),
-        restaurant: restaurantId,
+        restaurant: restaurantId, // 当前餐厅ID
         date: currentDate
       }]);
 
     if (!error) {
-      setNewItem({ no: '', food: '', style: '', score: '' });
-      await fetchMenuItems();
+      setNewItem({ no: '', food: '', style: '', score: '' }); // 清空输入框
+      await fetchMenuItems(); // 刷新菜单列表
     } else {
       console.error('Error adding menu item:', error);
       alert('添加失败，请重试');
