@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../supabaseClient';
 import { useParams } from 'react-router-dom';
 
 const Menu = () => {
-  const { restaurantId } = useParams(); // 从路由获取当前餐厅ID
+  const { restaurantId } = useParams();
   const [menuItems, setMenuItems] = useState([]);
   const [newItem, setNewItem] = useState({
     no: '',
@@ -13,12 +13,8 @@ const Menu = () => {
   });
   const [loading, setLoading] = useState(false);
 
-  // 获取当前餐厅的菜单
-  useEffect(() => {
-    fetchMenuItems();
-  }, [restaurantId]);
-
-  const fetchMenuItems = async () => {
+  // 使用useCallback缓存函数以避免重复创建
+  const fetchMenuItems = useCallback(async () => {
     setLoading(true);
     const { data, error } = await supabase
       .from('Menu')
@@ -32,7 +28,11 @@ const Menu = () => {
       console.error('Error fetching menu items:', error);
     }
     setLoading(false);
-  };
+  }, [restaurantId]); // 添加restaurantId作为依赖
+
+  useEffect(() => {
+    fetchMenuItems();
+  }, [fetchMenuItems]); // 现在fetchMenuItems是稳定的依赖
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -49,9 +49,10 @@ const Menu = () => {
     }
 
     setLoading(true);
-    const currentDate = new Date().toISOString().split('T')[0]; // 获取当前日期 YYYY-MM-DD
+    const currentDate = new Date().toISOString().split('T')[0];
 
-    const { data, error } = await supabase
+    // 移除未使用的data变量
+    const { error } = await supabase
       .from('Menu')
       .insert([
         {
@@ -65,7 +66,6 @@ const Menu = () => {
       ]);
 
     if (!error) {
-      // 清空输入框并刷新列表
       setNewItem({
         no: '',
         food: '',
@@ -84,7 +84,6 @@ const Menu = () => {
     <div className="menu-container">
       <h2>餐厅菜单</h2>
       
-      {/* 菜单列表 */}
       <div className="menu-list">
         {loading && menuItems.length === 0 ? (
           <p>加载中...</p>
@@ -116,7 +115,6 @@ const Menu = () => {
         )}
       </div>
 
-      {/* 添加新菜单项表单 */}
       <div className="add-menu-form">
         <h3>添加新菜品</h3>
         <div className="form-group">
