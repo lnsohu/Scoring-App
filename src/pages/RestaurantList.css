@@ -1,0 +1,111 @@
+/* 餐厅列表容器 */
+.restaurant-list-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* 头部样式 */
+.restaurant-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.restaurant-list-header h1 {
+    color: #333;
+    font-size: 28px;
+    margin: 0;
+}
+
+/* 添加餐厅按钮 */
+.add-restaurant-btn {
+    background-color: #1890ff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.add-restaurant-btn:hover {
+    background-color: #40a9ff;
+}
+
+/* 餐厅网格布局 */
+.restaurant-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* 餐厅卡片样式 */
+.restaurant-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.restaurant-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.restaurant-info h2 {
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+/* 信息标签样式 */
+.info-label {
+    color: #666;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+/* 状态标签 */
+.status-badge {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.status-badge.open {
+    background-color: #f6ffed;
+    color: #52c41a;
+    border: 1px solid #b7eb8f;
+}
+
+.status-badge.closed {
+    background-color: #fff2f0;
+    color: #f5222d;
+    border: 1px solid #ffccc7;
+}
+
+/* 加载和错误状态 */
+.loading-indicator,
+.error-message {
+    text-align: center;
+    padding: 40px 0;
+    color: #666;
+}
+
+.error-message button {
+    margin-top: 10px;
+    padding: 5px 15px;
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
