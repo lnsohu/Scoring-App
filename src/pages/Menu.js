@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../supabaseClient';
 import { useParams } from 'react-router-dom';
+import './Menu.css';  // 添加这行
 
 const Menu = () => {
   const { restaurantId } = useParams();
