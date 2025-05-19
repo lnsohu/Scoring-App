@@ -82,6 +82,9 @@ const Menu = () => {
     setLoading(false);
   };
 
+  // 按分数从高到低排序
+  const sortedMenuItems = [...menuItems].sort((a, b) => b.score - a.score);
+
   return (
     <div className="menu-container">
       <h2>餐厅菜单</h2>
@@ -102,7 +105,7 @@ const Menu = () => {
               </tr>
             </thead>
             <tbody>
-              {menuItems.map(item => (
+              {sortedMenuItems.map(item => (
                 <tr key={`${item.no}-${item.date}`}>
                   <td>{item.no}</td>
                   <td>{item.food}</td>
