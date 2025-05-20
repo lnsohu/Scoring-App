@@ -11,7 +11,8 @@ const Menu = () => {
     food: '',
     style: '',
     score: '',
-    price: '' // 新增price字段
+    price: '', // 新增price字段
+    persistent: ''  // 新增persistent字段
   });
   const [loading, setLoading] = useState(false);
 
@@ -45,7 +46,7 @@ const Menu = () => {
   };
 
   const handleAddItem = async () => {
-    if (!newItem.no || !newItem.food || !newItem.style || !newItem.score || !newItem.price) {
+    if (!newItem.no || !newItem.food || !newItem.style || !newItem.score || !newItem.price || !newItem.persistent) {
       alert('请填写所有字段');
       return;
     }
@@ -62,6 +63,7 @@ const Menu = () => {
           style: newItem.style,
           score: parseFloat(newItem.score),
           price: parseFloat(newItem.price), // 新增price字段
+          persistent: parseFloat(newItem.persistent), // 新增persistent字段
           restaurant: restaurantId,
           date: currentDate
         }
@@ -73,7 +75,8 @@ const Menu = () => {
         food: '',
         style: '',
         score: '',
-        price: '' // 重置price字段
+        price: '',
+        persistent: ''
       });
       await fetchMenuItems();
     } else {
@@ -89,7 +92,7 @@ const Menu = () => {
   return (
     <div className="menu-container">
       <h2>餐厅菜单</h2>
-      
+
       <div className="menu-list">
         {loading && menuItems.length === 0 ? (
           <p>加载中...</p>
@@ -102,7 +105,8 @@ const Menu = () => {
                 <th>类型</th>
                 <th>评分</th>
                 <th>价格</th> {/* 新增价格列 */}
-                <th>日期</th>
+                <th>Persistent</th> {/* 新增persistent列 */}
+                {/* 已移除“日期”列 */}
               </tr>
             </thead>
             <tbody>
@@ -113,7 +117,8 @@ const Menu = () => {
                   <td>{item.style}</td>
                   <td>{item.score}</td>
                   <td>{item.price ? `¥${item.price.toFixed(2)}` : '-'}</td> {/* 格式化价格显示 */}
-                  <td>{item.date}</td>
+                  <td>{item.persistent}</td> {/* 新增persistent显示 */}
+                  {/* 已移除展示日期 */}
                 </tr>
               ))}
             </tbody>
@@ -122,7 +127,7 @@ const Menu = () => {
           <p>暂无菜单数据</p>
         )}
       </div>
-
+      
       <div className="add-menu-form">
         <h3>添加新菜品</h3>
         <div className="form-group">
@@ -177,6 +182,18 @@ const Menu = () => {
             onChange={handleInputChange}
             placeholder="输入价格"
             step="0.01"
+            min="0"
+          />
+        </div>
+        <div className="form-group">
+          <label>Persistent</label>
+          <input
+            type="number"
+            name="persistent"
+            value={newItem.persistent}
+            onChange={handleInputChange}
+            placeholder="输入Persistent值"
+            step="1"
             min="0"
           />
         </div>
