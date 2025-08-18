@@ -105,7 +105,7 @@ const Menu = () => {
                 <th>类型</th>
                 <th>评分</th>
                 <th>价格</th> {/* 新增价格列 */}
-                <th>Persistent</th> {/* 新增persistent列 */}
+                <th>临时摊位</th> {/* 新增persistent列 */}
                 {/* 已移除“日期”列 */}
               </tr>
             </thead>
