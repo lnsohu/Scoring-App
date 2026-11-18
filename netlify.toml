@@ -8,7 +8,5 @@
   # Local dev command. A.k.a npm start
   command = "react-scripts start"
 
-[[functions]]
-  function = "keepawake"
-  path = "functions/keepawake.js"
-  schedule = "0 8 * * *"
+[functions]
+  keepawake = "./functions/keepawake.js"
